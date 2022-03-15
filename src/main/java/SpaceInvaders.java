@@ -24,18 +24,15 @@ public class SpaceInvaders extends PApplet {
         noSmooth();
     }
 
-    public void draw()
-    {
+    public void draw() {
         background(0);
         noStroke();
 
         generateRandomColors();
         int imagePixelSize = 2 * BorderSize + PixelSizePerInvader;
 
-        for (int y = BorderSize; y < Height; y += imagePixelSize)
-        {
-            for (int x = BorderSize; x < Width; x += imagePixelSize)
-            {
+        for (int y = BorderSize; y < Height; y += imagePixelSize) {
+            for (int x = BorderSize; x < Width; x += imagePixelSize) {
                 image(GenerateInvader(), x, y, PixelSizePerInvader, PixelSizePerInvader);
             }
         }
@@ -47,21 +44,17 @@ public class SpaceInvaders extends PApplet {
         redraw();
     }
 
-    private PImage GenerateInvader()
-    {
+    private PImage GenerateInvader() {
         PImage img = createImage(InvaderPixelAmount, InvaderPixelAmount, ARGB);
-        for (int y = 0; y < InvaderPixelAmount; y++)
-        {
-            for (int x = 0; x < InvaderPixelAmount / 2; x++)
-            {
+        for (int y = 0; y < InvaderPixelAmount; y++) {
+            for (int x = 0; x < InvaderPixelAmount / 2; x++) {
                 int colorIndex = getRandomColorIndex();
                 img.set(x, y, colors[colorIndex].getRGB());
                 img.set(InvaderPixelAmount - 1 - x, y, colors[colorIndex].getRGB());
             }
 
             // center
-            if (PixelSizePerInvader % 2 != 0)
-            {
+            if (PixelSizePerInvader % 2 != 0) {
                 img.set(InvaderPixelAmount / 2, y, colors[getRandomColorIndex()].getRGB());
             }
         }
@@ -75,10 +68,9 @@ public class SpaceInvaders extends PApplet {
 
     private void generateRandomColors() {
         for (int i = 0; i < colors.length; i++) {
-            if(i < colors.length - 3) {
-                colors[i] = new Color((int)random(0, 255), (int)random(0, 255), (int)random(0, 255), 255);
-            }
-            else {
+            if (i < colors.length - 3) {
+                colors[i] = new Color((int) random(0, 255), (int) random(0, 255), (int) random(0, 255), 255);
+            } else {
                 colors[i] = new Color(0, 0, 0, 0);
             }
         }
