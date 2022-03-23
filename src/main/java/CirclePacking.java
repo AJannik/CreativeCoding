@@ -1,5 +1,5 @@
 import Util.Circle;
-import com.sun.javafx.geom.Vec2f;
+import Util.Vector2f;
 import processing.core.PApplet;
 
 import java.util.ArrayList;
@@ -12,7 +12,7 @@ public class CirclePacking extends PApplet {
 
     private final int Width = 1000;
     private final int Height = 1000;
-    private final int numCircles = 500;
+    private final int numCircles = 200;
     private ArrayList<Circle> circles = new ArrayList<>();
 
     public void settings() {
@@ -46,12 +46,12 @@ public class CirclePacking extends PApplet {
 
     private void addCircle() {
         boolean validPos = true;
-        Vec2f pos;
+        Vector2f pos;
 
         do {
-            pos = new Vec2f(random(0f, Width), random(0f, Height));
+            pos = new Vector2f(random(0f, Width), random(0f, Height));
             for (Circle circle : circles) {
-                if (circle.pos == pos) {
+                if (circle.circleCollision(new Circle(1f, pos))) {
                     validPos = false;
                     break;
                 }

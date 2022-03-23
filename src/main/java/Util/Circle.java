@@ -1,12 +1,11 @@
 package Util;
 
-import com.sun.javafx.geom.Vec2f;
-
 public class Circle {
     public float diameter;
-    public Vec2f pos;
+    public Vector2f pos;
 
-    public Circle(float diameter, Vec2f pos) {
+
+    public Circle(float diameter, Vector2f pos) {
         this.diameter = diameter;
         this.pos = pos;
     }
