@@ -1,7 +1,7 @@
 package Util;
 
 public class Ball extends Circle implements IGameObject {
-    private Vector2f velocity;
+    protected Vector2f velocity;
     public Vector2f direction;
     public float acceleration;
 
@@ -27,5 +27,9 @@ public class Ball extends Circle implements IGameObject {
         velocity.add(v);
         velocity.limit(10f);
         pos.add(velocity);
+    }
+
+    public Vector2f getVelocity() {
+        return velocity;
     }
 }
