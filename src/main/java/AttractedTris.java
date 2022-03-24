@@ -23,7 +23,6 @@ public class AttractedTris extends PApplet {
     public void setup() {
         frameRate(30);
         ellipseMode(CENTER);
-        frameRate(30);
         for (int i = 0; i < numTris; i++) {
             triangleBoids.add(new Ball(20, new Vector2f(random(0f, Width), random(0f, Height))));
             triangleBoids.get(i).acceleration = triAcceleration;
@@ -40,7 +39,7 @@ public class AttractedTris extends PApplet {
             }
 
             tri.update(1f / frameRate);
-            
+
             pushMatrix();
             translate(tri.pos.x, tri.pos.y);
             rotate(atan2(tri.getVelocity().y, tri.getVelocity().x));
