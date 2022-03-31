@@ -28,8 +28,8 @@ public class ParticleSystem extends GameObject{
     protected void draw() {
     }
 
-    public void addParticle(float diameter, Vector2f offset, PApplet sketch, Vector2f direction, float acceleration, float lifespan) {
-        particles.add(new Particle(diameter, Vector2f.add(pos, offset), sketch, direction, acceleration, lifespan));
+    public void addCircleParticle(PApplet sketch, float radius, Vector2f offset, Vector2f direction, float acceleration, float lifespan) {
+        particles.add(new CircleParticle(radius, Vector2f.add(pos, offset), sketch, direction, acceleration, lifespan));
     }
 
     public void applyForce(Vector2f force) {

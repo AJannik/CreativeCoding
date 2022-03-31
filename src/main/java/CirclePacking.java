@@ -28,7 +28,7 @@ public class CirclePacking extends PApplet {
 
     public void draw() {
         for (Circle circle : circles) {
-            ellipse(circle.pos.x, circle.pos.y, circle.diameter, circle.diameter);
+            circle.run(1f / frameRate);
 
             boolean collision = false;
             for (Circle other : circles) {

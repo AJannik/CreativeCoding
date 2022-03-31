@@ -1,4 +1,4 @@
-import Util.Ball;
+import Util.Circle;
 import Util.Vector2f;
 import processing.core.PApplet;
 
@@ -14,7 +14,7 @@ public class BouncingBalls extends PApplet {
     private final int Height = 1000;
     private final int numBalls = 100;
     private final float ballAcceleration = 10f;
-    private ArrayList<Ball> bouncingBalls = new ArrayList<>();
+    private ArrayList<Circle> bouncingBalls = new ArrayList<>();
 
     public void settings() {
         size(Width, Height);
@@ -24,14 +24,14 @@ public class BouncingBalls extends PApplet {
         frameRate(30);
         ellipseMode(CENTER);
         for (int i = 0; i < numBalls; i++) {
-            bouncingBalls.add(new Ball(20, new Vector2f(random(0f, Width), random(0f, Height)), this));
+            bouncingBalls.add(new Circle(20, new Vector2f(random(0f, Width), random(0f, Height)), this));
             bouncingBalls.get(i).acceleration = ballAcceleration;
         }
     }
 
     public void draw() {
         background(0);
-        for (Ball b : bouncingBalls) {
+        for (Circle b : bouncingBalls) {
             b.direction = new Vector2f(mouseX, mouseY);
             b.direction.sub(b.pos);
             if (mousePressed) {

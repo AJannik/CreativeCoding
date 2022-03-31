@@ -2,7 +2,7 @@ package Util;
 
 import processing.core.PApplet;
 
-public class Triangle extends Ball{
+public class Triangle extends Circle {
     public Triangle(float diameter, Vector2f pos, PApplet sketch) {
         super(diameter, pos, sketch);
     }

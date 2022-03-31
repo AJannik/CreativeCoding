@@ -23,7 +23,7 @@ public class ParticleSystemSketch extends PApplet {
 
     public void draw() {
         background(255);
-        ps.addParticle(50, new Vector2f(500, 200), this, new Vector2f(0f, 1f), 5f, 5f);
+        ps.addCircleParticle(this, 25, new Vector2f(500, 200), new Vector2f(0f, 1f), 5f, 5f);
         ps.applyForce(new Vector2f(random(-5f, 5f), -8f));
 
         ps.run(1f / frameRate);

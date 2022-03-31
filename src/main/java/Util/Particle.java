@@ -2,34 +2,27 @@ package Util;
 
 import processing.core.PApplet;
 
-public class Particle extends Ball {
-    private final float lifespan;
-    private float lifetime;
+public class Particle extends PhysicsObject {
+    protected final float lifespan;
+    protected float lifetime;
 
-    public Particle(float diameter, Vector2f pos, PApplet sketch, Vector2f direction, float acceleration, float lifespan) {
-        super(diameter, pos, sketch, direction, acceleration);
+    public Particle(PApplet sketch, Vector2f pos, float lifespan) {
+        super(sketch, pos, new Vector2f(0, 0), 0);
         this.lifespan = lifespan;
         lifetime = lifespan;
     }
 
-    public Particle(float diameter, Vector2f pos, PApplet sketch, float lifespan) {
-        super(diameter, pos, sketch);
+    public Particle(PApplet sketch, Vector2f pos, Vector2f direction, float acceleration, float lifespan) {
+        super(sketch, pos, direction, acceleration);
         this.lifespan = lifespan;
         lifetime = lifespan;
     }
 
     @Override
-    public void update(float deltaTime) {
+    protected void update(float deltaTime) {
         super.update(deltaTime);
         lifetime = Math.max(lifetime - deltaTime, 0f);
         acceleration = 0f;
-    }
-
-    @Override
-    protected void draw() {
-        sketch.stroke(0f, 255f * getLifetimeRelative());
-        sketch.fill(0f, 255f * getLifetimeRelative());
-        super.draw();
     }
 
     public void addForce(Vector2f force) {
