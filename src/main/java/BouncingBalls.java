@@ -23,9 +23,8 @@ public class BouncingBalls extends PApplet {
     public void setup() {
         frameRate(30);
         ellipseMode(CENTER);
-        frameRate(30);
         for (int i = 0; i < numBalls; i++) {
-            bouncingBalls.add(new Ball(20, new Vector2f(random(0f, Width), random(0f, Height))));
+            bouncingBalls.add(new Ball(20, new Vector2f(random(0f, Width), random(0f, Height)), this));
             bouncingBalls.get(i).acceleration = ballAcceleration;
         }
     }
@@ -39,8 +38,7 @@ public class BouncingBalls extends PApplet {
                 b.direction.mult(-1f);
             }
 
-            b.update(1f / frameRate);
-            ellipse(b.pos.x, b.pos.y, b.diameter, b.diameter);
+            b.run(1f / frameRate);
         }
     }
 }
