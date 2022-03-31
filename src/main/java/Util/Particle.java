@@ -22,6 +22,7 @@ public class Particle extends Ball {
     public void update(float deltaTime) {
         super.update(deltaTime);
         lifetime = Math.max(lifetime - deltaTime, 0f);
+        acceleration = 0f;
     }
 
     @Override
@@ -29,6 +30,10 @@ public class Particle extends Ball {
         sketch.stroke(0f, 255f * getLifetimeRelative());
         sketch.fill(0f, 255f * getLifetimeRelative());
         super.draw();
+    }
+
+    public void addForce(Vector2f force) {
+        velocity.add(force);
     }
 
     public float getLifetimeRelative() {

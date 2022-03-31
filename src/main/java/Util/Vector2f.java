@@ -39,6 +39,12 @@ public class Vector2f extends Vec2f {
         y += v.y;
     }
 
+    public static Vector2f add(Vector2f a, Vector2f b) {
+        Vector2f c = new Vector2f(a.x, a.y);
+        c.add(b);
+        return c;
+    }
+
     public void sub(Vector2f v) {
         x -= v.x;
         y -= v.y;

@@ -3,7 +3,7 @@ package Util;
 import processing.core.PApplet;
 import processing.core.PConstants;
 
-public class Ball extends Circle implements IGameObject {
+public class Ball extends Circle {
     protected Vector2f velocity;
     public Vector2f direction;
     public float acceleration;

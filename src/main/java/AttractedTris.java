@@ -38,8 +38,6 @@ public class AttractedTris extends PApplet {
                 tri.direction.mult(-1f);
             }
 
-
-
             pushMatrix();
             translate(tri.pos.x, tri.pos.y);
             rotate(atan2(tri.getVelocity().y, tri.getVelocity().x));
