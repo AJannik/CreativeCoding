@@ -1,4 +1,4 @@
-import Util.Triangle;
+import Util.Geometry.Triangle;
 import Util.Vector2f;
 import processing.core.PApplet;
 

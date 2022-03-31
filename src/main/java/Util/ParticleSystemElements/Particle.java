@@ -1,5 +1,7 @@
-package Util;
+package Util.ParticleSystemElements;
 
+import Util.PhysicsObject;
+import Util.Vector2f;
 import processing.core.PApplet;
 
 public class Particle extends PhysicsObject {
@@ -26,7 +28,9 @@ public class Particle extends PhysicsObject {
     }
 
     public void addForce(Vector2f force) {
-        velocity.add(force);
+        acceleration += force.magnitude();
+        direction.add(force.normalized());
+        direction.normalize();
     }
 
     public float getLifetimeRelative() {

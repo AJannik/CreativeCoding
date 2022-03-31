@@ -1,4 +1,4 @@
-import Util.Circle;
+import Util.Geometry.Circle;
 import Util.Vector2f;
 import processing.core.PApplet;
 

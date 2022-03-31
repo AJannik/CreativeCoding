@@ -1,5 +1,6 @@
-package Util;
+package Util.Geometry;
 
+import Util.Vector2f;
 import processing.core.PApplet;
 
 public class Triangle extends Circle {

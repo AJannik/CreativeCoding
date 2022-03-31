@@ -1,5 +1,7 @@
-package Util;
+package Util.Geometry;
 
+import Util.PhysicsObject;
+import Util.Vector2f;
 import processing.core.PApplet;
 import processing.core.PConstants;
 

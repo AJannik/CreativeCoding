@@ -1,10 +1,11 @@
-package Util;
+package Util.ParticleSystemElements;
 
+import Util.Vector2f;
 import processing.core.PApplet;
 import processing.core.PConstants;
 
 public class CircleParticle extends Particle {
-    private final float diameter;
+    public float diameter;
 
     public CircleParticle(float diameter, Vector2f pos, PApplet sketch, Vector2f direction, float acceleration, float lifespan) {
         super(sketch, pos, direction, acceleration, lifespan);
@@ -17,14 +18,9 @@ public class CircleParticle extends Particle {
     }
 
     @Override
-    public void update(float deltaTime) {
-        super.update(deltaTime);
-    }
-
-    @Override
     protected void draw() {
-        sketch.stroke(0f, 255f * getLifetimeRelative());
-        sketch.fill(0f, 255f * getLifetimeRelative());
+        sketch.stroke(200, 255f * getLifetimeRelative());
+        sketch.fill(200, 255f * getLifetimeRelative());
         sketch.ellipseMode(PConstants.CENTER);
         sketch.ellipse(pos.x, pos.y, diameter, diameter);
     }
