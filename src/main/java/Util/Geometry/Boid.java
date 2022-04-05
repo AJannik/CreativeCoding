@@ -25,82 +25,56 @@ public class Boid extends Triangle {
     }
 
     public void flock(Boid[] boids) {
-        Vector2f alignment = align(boids);
-        alignment.mult(2f);
-        Vector2f cohesion = cohesion(boids);
-        Vector2f separation = separation(boids);
-        separation.mult(2f);
-
-        Vector2f newDirection = new Vector2f(0, 0);
-        newDirection.add(alignment);
-        newDirection.add(cohesion);
-        newDirection.add(separation);
+        Vector2f newDirection = calcNewDirection(boids);
         acceleration = newDirection.magnitude();
         direction.add(newDirection.normalized());
     }
 
-    private Vector2f align(Boid[] boids) {
-        Vector2f steeringForce = new Vector2f(0, 0);
+    private Vector2f calcNewDirection(Boid[] boids) {
+        Vector2f newDirection = new Vector2f(0, 0);
+        Vector2f alignment = new Vector2f(0, 0);
+        Vector2f cohesion = new Vector2f(0, 0);
+        Vector2f separation = new Vector2f(0, 0);
         int numBoids = 0;
+
         for (Boid b : boids) {
-            if (b != this && b.pos.distance(pos) < perceptionRadius) {
-                steeringForce.add(b.velocity);
+            float distance = b.pos.distance(pos);
+            if (b != this && distance < perceptionRadius) {
+                alignment.add(b.velocity);
+                cohesion.add(b.pos);
+
+                Vector2f diff = Vector2f.sub(pos, b.pos);
+                diff.div(distance);
+                separation.add(diff);
+
                 numBoids++;
             }
         }
 
         if (numBoids > 0) {
-            steeringForce.div(numBoids);
-            steeringForce.resize(maxSpeed);
-            steeringForce.sub(velocity);
-            steeringForce.limit(maxForce);
+            alignment.div(numBoids);
+            alignment.resize(maxSpeed);
+            alignment.sub(velocity);
+            alignment.limit(maxForce);
+
+            cohesion.div(numBoids);
+            cohesion.sub(pos);
+            cohesion.resize(maxSpeed);
+            cohesion.sub(velocity);
+            cohesion.limit(maxForce);
+
+            separation.div(numBoids);
+            separation.resize(maxSpeed);
+            separation.sub(velocity);
+            separation.limit(maxForce);
         }
 
-        return steeringForce;
-    }
-
-    private Vector2f cohesion(Boid[] boids) {
-        Vector2f steeringForce = new Vector2f(0, 0);
-        int numBoids = 0;
-        for (Boid b : boids) {
-            if (b != this && b.pos.distance(pos) < perceptionRadius) {
-                steeringForce.add(b.pos);
-                numBoids++;
-            }
-        }
-
-        if (numBoids != 0) {
-            steeringForce.div(numBoids);
-            steeringForce.sub(pos);
-            steeringForce.resize(maxSpeed);
-            steeringForce.sub(velocity);
-            steeringForce.limit(maxForce);
-        }
-
-        return steeringForce;
-    }
-
-    private Vector2f separation(Boid[] boids) {
-        Vector2f steeringForce = new Vector2f(0, 0);
-        int numBoids = 0;
-        for (Boid b : boids) {
-            float distance = b.pos.distance(pos);
-            if (b != this && distance < perceptionRadius) {
-                Vector2f diff = Vector2f.sub(pos, b.pos);
-                diff.div(distance);
-                steeringForce.add(diff);
-                numBoids++;
-            }
-        }
-
-        if (numBoids != 0) {
-            steeringForce.div(numBoids);
-            steeringForce.resize(maxSpeed);
-            steeringForce.sub(velocity);
-            steeringForce.limit(maxForce);
-        }
-
-        return steeringForce;
+        alignment.mult(2f);
+        separation.mult(2f);
+        newDirection.add(alignment);
+        newDirection.add(cohesion);
+        newDirection.add(separation);
+        return newDirection;
     }
 
     private void clampToScreen() {
