@@ -50,6 +50,12 @@ public class Vector2f extends Vec2f {
         y -= v.y;
     }
 
+    public static Vector2f sub(Vector2f a, Vector2f b) {
+        Vector2f c = new Vector2f(a.x, a.y);
+        c.sub(b);
+        return c;
+    }
+
     public void mult(Vector2f v) {
         x *= v.x;
         y *= v.y;
@@ -58,6 +64,16 @@ public class Vector2f extends Vec2f {
     public void mult(float f) {
         x *= f;
         y *= f;
+    }
+
+    public void div(Vector2f v) {
+        x /= v.x;
+        y /= v.y;
+    }
+
+    public void div(float f) {
+        x /= f;
+        y /= f;
     }
 
     public void limit(float f) {
@@ -76,5 +92,10 @@ public class Vector2f extends Vec2f {
         if (y < -f) {
             y = -f;
         }
+    }
+
+    public void resize(float length) {
+        normalize();
+        mult(length);
     }
 }

@@ -51,7 +51,7 @@ public class CirclePacking extends PApplet {
         do {
             pos = new Vector2f(random(0f, Width), random(0f, Height));
             for (Circle circle : circles) {
-                if (circle.circleCollision(new Circle(1f, pos, this))) {
+                if (circle.circleCollision(new Circle(this, pos, 1f))) {
                     validPos = false;
                     break;
                 }
@@ -59,6 +59,6 @@ public class CirclePacking extends PApplet {
         } while (!validPos);
 
 
-        circles.add(new Circle(1f, pos, this));
+        circles.add(new Circle(this, pos, 1f));
     }
 }

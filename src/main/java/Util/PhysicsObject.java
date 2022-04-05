@@ -4,8 +4,8 @@ import processing.core.PApplet;
 
 public class PhysicsObject extends GameObject {
     protected Vector2f velocity;
-    public Vector2f direction;
-    public float acceleration;
+    protected Vector2f direction;
+    protected float acceleration;
 
     public PhysicsObject(PApplet sketch, Vector2f pos, Vector2f direction, float acceleration) {
         super(sketch, pos);
@@ -20,8 +20,10 @@ public class PhysicsObject extends GameObject {
         v.mult(acceleration);
         v.mult(deltaTime);
         velocity.add(v);
-        velocity.limit(10f);
+        velocity.limit(8f);
         pos.add(velocity);
+        acceleration = 0;
+        direction.mult(0);
     }
 
     protected void draw() {
@@ -29,5 +31,11 @@ public class PhysicsObject extends GameObject {
 
     public Vector2f getVelocity() {
         return velocity;
+    }
+
+    public void addForce(Vector2f force) {
+        acceleration += force.magnitude();
+        direction.add(force.normalized());
+        direction.normalize();
     }
 }

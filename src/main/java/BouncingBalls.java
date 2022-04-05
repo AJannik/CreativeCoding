@@ -24,20 +24,23 @@ public class BouncingBalls extends PApplet {
         frameRate(30);
         ellipseMode(CENTER);
         for (int i = 0; i < numBalls; i++) {
-            bouncingBalls.add(new Circle(20, new Vector2f(random(0f, Width), random(0f, Height)), this));
-            bouncingBalls.get(i).acceleration = ballAcceleration;
+            bouncingBalls.add(new Circle(this, new Vector2f(random(0f, Width), random(0f, Height)), 20));
         }
     }
 
     public void draw() {
         background(0);
         for (Circle b : bouncingBalls) {
-            b.direction = new Vector2f(mouseX, mouseY);
-            b.direction.sub(b.pos);
+            Vector2f force = new Vector2f(mouseX, mouseY);
+            force.sub(b.pos);
+            force.normalize();
+            force.mult(ballAcceleration);
+
             if (mousePressed) {
-                b.direction.mult(-1f);
+                force.mult(-1f);
             }
 
+            b.addForce(force);
             b.run(1f / frameRate);
         }
     }

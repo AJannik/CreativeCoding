@@ -24,13 +24,6 @@ public class Particle extends PhysicsObject {
     protected void update(float deltaTime) {
         super.update(deltaTime);
         lifetime = Math.max(lifetime - deltaTime, 0f);
-        acceleration = 0f;
-    }
-
-    public void addForce(Vector2f force) {
-        acceleration += force.magnitude();
-        direction.add(force.normalized());
-        direction.normalize();
     }
 
     public float getLifetimeRelative() {

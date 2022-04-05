@@ -24,25 +24,24 @@ public class AttractedTris extends PApplet {
         frameRate(30);
         ellipseMode(CENTER);
         for (int i = 0; i < numTris; i++) {
-            triangleBoids.add(new Triangle(20, new Vector2f(random(0f, Width), random(0f, Height)), this));
-            triangleBoids.get(i).acceleration = triAcceleration;
+            triangleBoids.add(new Triangle(this, new Vector2f(random(0f, Width), random(0f, Height)), 20));
         }
     }
 
     public void draw() {
         background(0);
         for (Triangle tri : triangleBoids) {
-            tri.direction = new Vector2f(mouseX, mouseY);
-            tri.direction.sub(tri.pos);
+            Vector2f force = new Vector2f(mouseX, mouseY);
+            force.sub(tri.pos);
+            force.normalize();
+            force.mult(triAcceleration);
+
             if (mousePressed) {
-                tri.direction.mult(-1f);
+                force.mult(-1f);
             }
 
-            pushMatrix();
-            translate(tri.pos.x, tri.pos.y);
-            rotate(atan2(tri.getVelocity().y, tri.getVelocity().x));
+            tri.addForce(force);
             tri.run(1f / frameRate);
-            popMatrix();
         }
     }
 }

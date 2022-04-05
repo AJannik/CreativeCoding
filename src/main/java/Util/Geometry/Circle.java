@@ -8,12 +8,12 @@ import processing.core.PConstants;
 public class Circle extends PhysicsObject {
     public float diameter;
 
-    public Circle(float diameter, Vector2f pos, PApplet sketch) {
+    public Circle(PApplet sketch, Vector2f pos, float diameter) {
         super(sketch, pos, new Vector2f(0, 0), 0);
         this.diameter = diameter;
     }
 
-    public Circle(PApplet sketch, Vector2f pos, Vector2f direction, float acceleration, float diameter) {
+    public Circle(PApplet sketch, Vector2f pos, float diameter, Vector2f direction, float acceleration) {
         super(sketch, pos, direction, acceleration);
         this.diameter = diameter;
     }
